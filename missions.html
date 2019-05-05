@@ -1,0 +1,170 @@
+﻿﻿<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>Volvo V40 任務派遣0208</title>
+    <link rel="stylesheet" href="mission.css">
+    <script src="https://d.line-scdn.net/liff/1.0/sdk.js"></script>
+    <script>
+////////////////////////////////////////////////////////
+
+window.onload = function (e) {
+
+   liff.init();
+};
+////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////
+// Query_String 轉型
+var obj = { };  //Object
+    
+function parseQueryString(uri){
+       var string_array = [ ];//Array
+       var string_array = uri.replace('?','').split("&");
+       //replace('?','')拿掉第一個問號
+   
+       for(var i =0;i<string_array.length; i++){
+       //console.log(string_array[i].split('=')[0]);     //[0]取得key name
+       //console.log(string_array[i].split('=')[1]);     //[1]取得value
+       obj[string_array[i].split('=')[0] ] = string_array[i].split('=')[1] || ''; 
+       //沒有值就預設為''
+       }
+       //獲得 obj.ADDR obj.Y obj.X
+       //window.alert(obj.X);
+       //
+       //
+       // 送出 Message Location type
+       liff.sendMessages([
+        {
+            type: "text",
+            text: "Mission：" + obj.ADDR,
+        }, 
+       {
+           "type": "location",
+           "title": obj.ADDR,
+           "address": obj.ADDR,
+           "latitude": obj.Y,
+           "longitude": obj.X
+       },
+       {
+           "type": "image",
+           "originalContentUrl": obj.IMG,
+           "previewImageUrl": obj.IMG,
+       },
+        ]).then(function () {
+            window.alert("出任務>>" + obj.ADDR);
+        }).catch(function (error) {
+            window.alert("位置傳送失敗錯誤碼: " + error);
+        });
+}
+
+// 無圖
+function parseQueryStringNoImg(uri){
+       var string_array = [ ];//Array
+       var string_array = uri.replace('?','').split("&");
+       //replace('?','')拿掉第一個問號
+   
+       for(var i =0;i<string_array.length; i++){
+       //console.log(string_array[i].split('=')[0]);     //[0]取得key name
+       //console.log(string_array[i].split('=')[1]);     //[1]取得value
+       obj[string_array[i].split('=')[0] ] = string_array[i].split('=')[1] || ''; 
+       //沒有值就預設為''
+       }
+       //獲得 obj.ADDR obj.Y obj.X
+       //window.alert(obj.X);
+       //
+       //
+       // 送出 Message Location type
+       liff.sendMessages([
+        {
+            type: "text",
+            text: "Mission：" + obj.ADDR,
+        }, 
+       {
+           "type": "location",
+           "title": obj.ADDR,
+           "address": obj.ADDR,
+           "latitude": obj.Y,
+           "longitude": obj.X
+       },
+        ]).then(function () {
+            window.alert("出任務>>" + obj.ADDR);
+        }).catch(function (error) {
+            window.alert("位置傳送失敗錯誤碼：" + error);
+        });
+}
+    </script>  
+</head>
+
+<body>
+
+    <div class="buttongroup">
+        <div class="buttonrow">
+            <hr/>
+            
+            點選出任務的地點，按鈕或圖片都可點選，<br/>
+            再到 Line 中按 Line2Volvo 傳送任務地點到汽車上。<br/>
+            <br/>
+            也可利用多重選單查詢該地天氣、紫外線、<br/>
+            空氣品質、潮汐、雨量、油價、地震和附近餐飲商店等等資訊。<br/>
+            <hr/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/FONPLIf.jpg&ADDR=宜蘭冬山伯朗大道&Y=24.6454621&X=121.8140694')">1宜蘭冬山伯朗大道</button><br/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/aH7sTAb.jpg&ADDR=新北市瑞芳不厭亭&Y=25.0894062&X=121.8475243')">2新北市瑞芳不厭亭</button><br/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/ebAphHM.jpg&ADDR=苗栗統一超商龍躍門市&Y=24.586433&X=120.7971061')">3苗栗統一超商龍躍門市</button><br/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/UQwV7Fy.jpg&ADDR=彰化王功風力發電區&Y=23.983955&X=120.339621')">4彰化王功風力發電區</button><br/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/GQc0mlI.jpg&ADDR=嘉義民雄星巴克門市&Y=23.5593846&X=120.4336583')">5嘉義民雄星巴克門市</button><br/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/K4tlIc9.jpg&ADDR=台南魔荳幼兒園&Y=22.9989991&X=120.1777603')">6台南魔荳幼兒園</button><br/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/HH5D24o.jpg&ADDR=屏東枋山海豚茉莉灣&Y=22.2434766&X=120.6638181')">7屏東枋山海豚茉莉灣</button><br/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/NGsXsBC.jpg&ADDR=屏東恆春星巴克門市&Y=22.0081939&X=120.7404743')">8屏東恆春星巴克門市</button><br/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/wALyKpB.jpg&ADDR=台東長良長富大道&Y=23.2673794&X=121.295416')">9台東長良長富大道</button><br/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/GEHLpeZ.jpg&ADDR=台東長濱金剛大道&Y=23.3305302&X=121.451355')">10台東長濱金剛大道</button><br/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/8hDjx41.jpg&ADDR=台東卑南山里火車站&Y=22.861988&X=121.137701')">11台東卑南山里火車站</button><br/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/yJvbIB6.jpg&ADDR=宜蘭天空島上的小木屋&Y=24.811941&X=121.807837')">12宜蘭天空島上的小木屋</button><br/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/TKhrLpI.jpg&ADDR=台東太麻里櫻木花道交道&Y=22.6214829&X=121.0066695')">13台東太麻里櫻木花道交道</button><br/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/pbnVxI0.jpg&ADDR=台東大武彩虹村&Y=22.3590483&X=120.9069195')">14台東大武彩虹村</button><br/>
+<button onclick="parseQueryString('?IMG=https://i.imgur.com/aqIC2I2.jpg&ADDR=台東大鳥裝置藝術&Y=22.3792351&X=120.9121343')">15台東大鳥裝置藝術</button><br/>
+
+
+       </div>
+    </div>
+
+    <div class="buttongroup">
+<br/>1
+<img width="200" src="https://i.imgur.com/FONPLIf.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/FONPLIf.jpg&ADDR=宜蘭冬山伯朗大道&Y=24.6454621&X=121.8140694')>
+<br/>2
+<img width="200" src="https://i.imgur.com/aH7sTAb.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/C8mZ6Fh.jpg&ADDR=新北市瑞芳不厭亭&Y=25.0894062&X=121.8475243')>
+<br/>3
+<img width="200" src="https://i.imgur.com/ebAphHM.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/ebAphHM.jpg&ADDR=苗栗統一超商龍躍門市&Y=24.586433&X=120.7971061')>
+<br/>4
+<img width="200" src="https://i.imgur.com/UQwV7Fy.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/UQwV7Fy.jpg&ADDR=彰化王功風力發電區&Y=23.983955&X=120.339621')>
+<br/>5
+<img width="200" src="https://i.imgur.com/GQc0mlI.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/GQc0mlI.jpg&ADDR=嘉義民雄星巴克門市&Y=23.5593846&X=120.4336583')>
+<br/>6
+<img width="200" src="https://i.imgur.com/K4tlIc9.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/K4tlIc9.jpg&ADDR=台南魔荳幼兒園&Y=22.9989991&X=120.1777603')>
+<br/>7
+<img width="200" src="https://i.imgur.com/HH5D24o.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/HH5D24o.jpg&ADDR=屏東枋山海豚茉莉灣&Y=22.2434766&X=120.6638181')>
+<br/>8
+<img width="200" src="https://i.imgur.com/NGsXsBC.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/NGsXsBC.jpg&ADDR=屏東恆春星巴克門市&Y=22.0081939&X=120.7404743')>
+<br/>9
+<img width="200" src="https://i.imgur.com/wALyKpB.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/wALyKpB.jpg&ADDR=台東長良長富大道&Y=23.2673794&X=121.295416')>
+<br/>10
+<img width="200" src="https://i.imgur.com/GEHLpeZ.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/GEHLpeZ.jpg&ADDR=台東長濱金剛大道&Y=23.3305302&X=121.451355')>
+<br/>11
+<img width="200" src="https://i.imgur.com/8hDjx41.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/8hDjx41.jpg&ADDR=台東卑南山里火車站&Y=22.861988&X=121.137701')>
+<br/>12
+<img width="200" src="https://i.imgur.com/yJvbIB6.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/yJvbIB6.jpg&ADDR=宜蘭天空島上的小木屋&Y=24.811941&X=121.807837')>
+<br/>12
+<img width="200" src="https://i.imgur.com/EUkm6KG.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/EUkm6KG.jpg&ADDR=宜蘭天空島上的小木屋&Y=24.811941&X=121.807837')>
+<br/>13
+<img width="200" src="https://i.imgur.com/TKhrLpI.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/TKhrLpI.jpg&ADDR=台東太麻里櫻木花道交道&Y=22.6214829&X=121.0066695')>
+<br/>14
+<img width="200" src="https://i.imgur.com/pbnVxI0.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/pbnVxI0.jpg&ADDR=台東大武彩虹村&Y=22.3590483&X=120.9069195')>
+<br/>15
+<img width="200" src="https://i.imgur.com/aqIC2I2.jpg" onclick=parseQueryStringNoImg('?IMG=https://i.imgur.com/aqIC2I2.jpg&ADDR=台東大鳥裝置藝術&Y=22.3792351&X=120.9121343')>
+
+<hr/>
+要刊載店家資訊，請在【解任務】中打賞鄒仔加好友聯繫。
+<hr/>
+
+    </div>
+    
+</body>
